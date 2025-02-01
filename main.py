@@ -1,10 +1,19 @@
 from fastapi import FastAPI, WebSocket
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from openai import OpenAI
 
 client = OpenAI(api_key="sk-c6e55ff3e4ca4ac5a040ff4f34d4f459", base_url="https://api.deepseek.com")
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"], 
+    allow_headers=["*"],
+)
 
 html_content = """
 <!DOCTYPE html>
