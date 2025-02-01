@@ -1,9 +1,10 @@
 from fastapi import FastAPI, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
+from os import getenv
 from fastapi.responses import HTMLResponse
 from openai import OpenAI
 
-client = OpenAI(api_key="sk-c6e55ff3e4ca4ac5a040ff4f34d4f459", base_url="https://api.deepseek.com")
+client = OpenAI(api_key=getenv("DEEP_SEEK_API_KEY"), base_url="https://api.deepseek.com")
 
 app = FastAPI()
 
