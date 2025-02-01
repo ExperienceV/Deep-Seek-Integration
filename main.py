@@ -35,7 +35,7 @@ html_content = """
             let socket;
 
             function connectWebSocket() {
-                socket = new WebSocket("ws://127.0.0.1:8000/chatbot");
+                socket = new WebSocket("wss://deep-seek-integration-production.up.railway.app/chat");
                 socket.onmessage = function(event) {
                     const messages = document.getElementById('messages');
                     const message = document.createElement('li');
