@@ -83,5 +83,5 @@ async def websocket_endpoint(websocket: WebSocket):
         await websocket.send_text(f"{ia_response}")
 
 if __name__ == "__main__":
-    port = int(getenv("PORT", 8000))  # Usa el puerto 8000 como fallback
+    port = int(getenv("PORT", 8080))  # Usa el puerto 8000 como fallback
     uvicorn.run(app, host="0.0.0.0", port=port)
