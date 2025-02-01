@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from os import getenv
 from fastapi.responses import HTMLResponse
 from openai import OpenAI
+import uvicorn
 
 client = OpenAI(api_key=getenv("DEEP_SEEK_API_KEY"), base_url="https://api.deepseek.com")
 
@@ -54,6 +55,10 @@ html_content = """
 """
 
 @app.get("/")
+def read_root():
+    return {"message": "Hello, Railway!"}
+
+@app.get("/chat")
 async def get():
     return HTMLResponse(html_content)
 
@@ -77,4 +82,6 @@ async def websocket_endpoint(websocket: WebSocket):
         print(f"Mensaje recibido del cliente: {data}")
         await websocket.send_text(f"{ia_response}")
 
-
+if __name__ == "__main__":
+    port = int(getenv("PORT", 8000))  # Usa el puerto 8000 como fallback
+    uvicorn.run(app, host="0.0.0.0", port=port)
